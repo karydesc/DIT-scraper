@@ -4,6 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 
 
+
+access_token = "EAAM0b8NuPY0BOzszfKgrQUZBDc1gYyAZCBu70ryzIpbSQ2C45rJ3omsRGaOtEZCfVlJYsfgE3bNZAV8IQlyhSXXkBkfXAO5ahLqayOy9EU7xZChTsjwT3eyZA9BIZA1UZAZBiykMMQvBCXxkFwJPK1TRO9M7Mw9ACVs4jL3sODk9oX4wZBDmVKX6APmxmMdXoVQccZD"
+page_id = "209342058929085"
 def check404(url_check):
     temp_page = requests.get(url_check)
     temp_soup = BeautifulSoup(temp_page.content, "html.parser")
@@ -35,8 +38,14 @@ while True:
         category_element = soup.find('b', string='Κατηγορία:')
         category_text = category_element.find_next_sibling(string=True).strip()
 
-        print(" Category: ", category_text, "\n", "Title: " + title.getText(), '\n', "Subtitle: ", subtitle, "\n",
-              body.getText(), '\n')
+
+        post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
+        payload = {
+            "access_token": access_token,
+            "message": title.getText() + "\n" +body.getText()
+        }
+        r = requests.post(post_url, data=payload)
+        print(r.text)
         continue
 
     print("not found")
@@ -44,18 +53,5 @@ while True:
 
 
 
-
-page = requests.get(URL)
-soup = BeautifulSoup(page.content, "html.parser")
-
-body = soup.find("div", class_="chris")
-title = soup.find("h1", class_="title")
-subtitle = soup.find("h2", class_="subtitle")
-category_element = soup.find('b', string='Κατηγορία:')
-category_text = category_element.find_next_sibling(string=True).strip()
-
-print(" Category: ", category_text, "\n", "Title: " + title.getText(), '\n', "Subtitle: ", subtitle, "\n",body.getText(), '\n')
-
-token = "EAAM0b8NuPY0BO2BpbI9CxHKQODWB08PlD9KrXtwqHQvqADougldhafWKYDi9DiZAkncd1FKoeSYHEzgEYydbC8SwsE2ukPH06V8Wwx1licbmThVI5Jc21tieeP5ozZAySGya7aN2gGE05EQX7Ypb9vEFZCCmYVksCmJzBN6FLQWena347ppuY0K"
 
 

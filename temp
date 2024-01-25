@@ -1,0 +1,9 @@
+body = soup.find("div", class_="chris")
+
+title = soup.find("h1", class_="title")
+subtitle = soup.find("h2", class_="subtitle")
+category_element = soup.find('b', string='Κατηγορία:')
+category_text = category_element.find_next_sibling(string=True).strip()
+
+print(" Category: ", category_text, "\n", "Title: " + title.getText(), '\n', "Subtitle: ", subtitle, "\n",
+      body.getText(), '\n')

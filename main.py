@@ -42,7 +42,8 @@ while True:
         post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
         payload = {
             "access_token": access_token,
-            "message": title.getText() + "\n" +body.getText()
+            "message": title.getText() + "\n" +body.getText(),
+            "source" : "https://i1.sndcdn.com/artworks-zyYqA8D0BdfuyH28-WeeHrw-t500x500.jpg"
         }
         r = requests.post(post_url, data=payload)
         print(r.text)

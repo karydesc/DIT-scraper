@@ -3,8 +3,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-
-
+photo_grammateia = "122115918656171640"
 access_token = "EAAM0b8NuPY0BOzszfKgrQUZBDc1gYyAZCBu70ryzIpbSQ2C45rJ3omsRGaOtEZCfVlJYsfgE3bNZAV8IQlyhSXXkBkfXAO5ahLqayOy9EU7xZChTsjwT3eyZA9BIZA1UZAZBiykMMQvBCXxkFwJPK1TRO9M7Mw9ACVs4jL3sODk9oX4wZBDmVKX6APmxmMdXoVQccZD"
 page_id = "209342058929085"
 def check404(url_check):
@@ -39,11 +38,16 @@ while True:
         category_text = category_element.find_next_sibling(string=True).strip()
 
 
+
+
+
+
         post_url = 'https://graph.facebook.com/{}/feed'.format(page_id)
         payload = {
             "access_token": access_token,
             "message": title.getText() + "\n" +body.getText(),
-            "source" : "https://i1.sndcdn.com/artworks-zyYqA8D0BdfuyH28-WeeHrw-t500x500.jpg"
+            "object_attachment": page_id  #IMAGE!!!!!!!!!!
+
         }
         r = requests.post(post_url, data=payload)
         print(r.text)

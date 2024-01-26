@@ -8,11 +8,15 @@ def formURL(num):
 def checkForLinks():
     elements = soup.select('a[rel="noopener"]')
     if not elements:
-        return
+        return "no links"
     for element in elements:
+
         link = element['href']
+        if link.startswith("/files"):
+            return "invalid"
         plain_text_link = f"[{element.text}]({link})"
         element.replace_with(plain_text_link)
+        return "ok"
 def getBody(obj):
     return obj.find("div", class_="chris").getText()
 
@@ -75,14 +79,15 @@ f.close()
 
 
 while True:
-    URL = formURL(webid)
+    URL = formURL(8713)
     if not check404(URL): #if site exists
-        print("found at "+str(webid))
+        print("found at "+str(8713))
         webid += 1
         writeNewID(webid) #write to file the incremented id for which the loop will continue searching
         page = requests.get(URL) #
         soup = BeautifulSoup(page.content, "html.parser")
-        checkForLinks()
+        if checkForLinks() == "invalid":
+            continue
         body = getBody(soup)
         title = getTitle(soup)
         #subtitle = getSubtitle(soup)

@@ -55,7 +55,6 @@ def postToFB(cat,title_,body_):
     r = requests.post(post_url, data=payload,files=file)
     print(r.text)
 
-photo_grammateia = "122115918656171640"
 access_token = "EAAM0b8NuPY0BOzszfKgrQUZBDc1gYyAZCBu70ryzIpbSQ2C45rJ3omsRGaOtEZCfVlJYsfgE3bNZAV8IQlyhSXXkBkfXAO5ahLqayOy9EU7xZChTsjwT3eyZA9BIZA1UZAZBiykMMQvBCXxkFwJPK1TRO9M7Mw9ACVs4jL3sODk9oX4wZBDmVKX6APmxmMdXoVQccZD"
 page_id = "209342058929085"
 def check404(url_check): #returns true if site doesnt exist

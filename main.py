@@ -53,7 +53,7 @@ def postToFB(cat, title_, body_):
     else:
         image_path = "invalid"
 
-    post_url = 'https://graph.facebook.com/{}/photos'.format(page_id)
+    post_url = 'https://graph.facebook.com/{}/photos'.format(dst_id)
     file = {"source": open(image_path, 'rb')}
     payload = {
         "access_token": access_token,
@@ -63,8 +63,8 @@ def postToFB(cat, title_, body_):
     print(r.text)
 
 
-access_token = "EAAM0b8NuPY0BOzszfKgrQUZBDc1gYyAZCBu70ryzIpbSQ2C45rJ3omsRGaOtEZCfVlJYsfgE3bNZAV8IQlyhSXXkBkfXAO5ahLqayOy9EU7xZChTsjwT3eyZA9BIZA1UZAZBiykMMQvBCXxkFwJPK1TRO9M7Mw9ACVs4jL3sODk9oX4wZBDmVKX6APmxmMdXoVQccZD"
-page_id = "678404451173479"
+access_token = ""
+dst_id = ""
 
 
 def check404(url_check):  # returns true if site doesnt exist
@@ -85,9 +85,9 @@ webid = int(f.read())
 f.close()
 
 while True:
-    URL = formURL(8715)
+    URL = formURL(webid)
     if not check404(URL):  # if site exists
-        print("found at " + "8715")
+        print("found at " + str(webid))
         webid += 1
         writeNewID(webid)  # write to file the incremented id for which the loop will continue searching
         page = requests.get(URL)
